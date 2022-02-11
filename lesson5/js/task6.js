@@ -95,33 +95,21 @@ button.onclick = function () {
 /* FETCH */
 
 // Step 1: Declare a global empty array variable to store a list of temples
-let templeList = [];
+let suggestionList = [];
 // Step 2: Declare a function named output that accepts a list of temples as an array argument and does the following for each temple:
 
-const output = (temples) =>{
-    temples.forEach(temple => {
+const output = (suggestions) =>{
+    suggestions.forEach(suggest => {
         // - Creates an HTML <article> element
         let article = document.createElement('article');
         // - Creates an HTML <h3> element and add the temple's templeName property to it
-        let templeName = document.createElement('h3');
-        templeName.textContent = temple.templeName;
+        let suggestion = document.createElement('h3');
+        suggestion.textContent = suggest.suggestion;
         // - Creates an HTML <h4> element and add the temple's location property to it
-        let location = document.createElement('h4');
-        location.textContent = temple.location;
-        // - Creates an HTML <h4> element and add the temple's dedicated property to it
-        let dedicated = document.createElement('h4');
-        dedicated.textContent = temple.dedicated;
-        // - Creates an HTML <img> element and add the temple's imageUrl property to the src attribute and the temple's templeName property to the alt attribute
-        let image = document.createElement('img');
-        image.setAttribute('src',temple.imageUrl);
-        image.setAttribute('alt',temple.templeName);
         // - Appends the <h3> element, the two <h4> elements, and the <img> element to the <article> element as children
-        article.appendChild(templeName);
-        article.appendChild(location);
-        article.appendChild(dedicated);
-        article.appendChild(image);
+        article.appendChild(suggestion);
         // - Appends the <article> element to the HTML element with an ID of temples
-        document.querySelector('#temples').appendChild(article);
+        document.querySelector('#suggestions').appendChild(article);
     });
 
 
@@ -135,15 +123,15 @@ const output = (temples) =>{
 // Step 6: Inside of second .then() method, assign the list of temples (as a JSON object) to the temples variable
 
 // Step 7: Finally, call the output function and pass it the list of temples
-fetch('https://byui-cse.github.io/cse121b-course/week05/temples.json')
+fetch('js/suggestionList.json')
     .then(response => response.json())
-    .then(temples => {
-        templeList = temples;
-        output(templeList);
+    .then(suggestions => {
+        suggestionList = suggestions;
+        output(suggestionList);
     });
 // Step 8: Declare a function named reset that clears all of the <article> elements from the HTML element with an ID of temples
 const reset = () =>{
-    document.querySelector('#temples').innerHTML = '';
+    document.querySelector('#suggestions').innerHTML = '';
 }  
 // Step 9: Declare a function named sortBy that does the following:
 const sortBy = () => {
@@ -155,31 +143,31 @@ const sortBy = () => {
 
     switch (filter) {
         case 'templeNameAscending':
-            output(templeList.sort(
-                (temple1, temple2) => {
-                    let templeName1 = temple1.templeName.toLowerCase();
-                    let templeName2 = temple2.templeName.toLowerCase();
-                    if (templeName1 < templeName2) return -1;
-                    else if (templeName1 > templeName2) return 1;
+            output(suggestionList.sort(
+                (suggestion1, suggestion2) => {
+                    let suggest1 = suggestion1.suggestion.toLowerCase();
+                    let suggest2 = suggestion2.suggestion.toLowerCase();
+                    if (suggest1 < suggest2) return -1;
+                    else if (suggest1 > suggest2) return 1;
                     else return 0;
                 }));
             break;
         case 'templeNameDescending':
-            output(templeList.sort(
-                (temple1, temple2) => {
-                    let templeName1 = temple1.templeName.toLowerCase();
-                    let templeName2 = temple2.templeName.toLowerCase();
-                    if (templeName1 > templeName2) return -1;
-                    else if (templeName1 < templeName2) return 1;
+            output(suggestionList.sort(
+                (suggestion1, suggestion2) => {
+                    let suggest1 = suggestion1.suggestion.toLowerCase();
+                    let suggest2 = suggestion2.suggestion.toLowerCase();
+                    if (suggest1 > suggest2) return -1;
+                    else if (suggest1 < suggest2) return 1;
                     else return 0;
                 }));
             break;
         default:
             // using ternary operators
             output(templeList.sort(
-                (temple1, temple2) => 
-                temple1.templeName.toLowerCase() > temple2.templeName.toLowerCase() ? 1 : 
-                    temple2.templeName.toLowerCase() > temple1.templeName.toLowerCase() ? -1 : 0));
+                (suggestion1, suggestion2) => 
+                suggestion1.suggestion.toLowerCase() > suggestion2.suggestion.toLowerCase() ? 1 : 
+                    suggestion2.suggestion.toLowerCase() > suggestion1.suggestion.toLowerCase() ? -1 : 0));
             break;
     }
 }
