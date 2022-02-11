@@ -142,7 +142,7 @@ const sortBy = () => {
     let filter = document.querySelector('#sortBy').value;
 
     switch (filter) {
-        case 'templeNameAscending':
+        case 'suggestionsAscending':
             output(suggestionList.sort(
                 (suggestion1, suggestion2) => {
                     let suggest1 = suggestion1.suggestion.toLowerCase();
@@ -152,7 +152,7 @@ const sortBy = () => {
                     else return 0;
                 }));
             break;
-        case 'templeNameDescending':
+        case 'suggestionsDescending':
             output(suggestionList.sort(
                 (suggestion1, suggestion2) => {
                     let suggest1 = suggestion1.suggestion.toLowerCase();
@@ -164,7 +164,7 @@ const sortBy = () => {
             break;
         default:
             // using ternary operators
-            output(templeList.sort(
+            output(suggestionList.sort(
                 (suggestion1, suggestion2) => 
                 suggestion1.suggestion.toLowerCase() > suggestion2.suggestion.toLowerCase() ? 1 : 
                     suggestion2.suggestion.toLowerCase() > suggestion1.suggestion.toLowerCase() ? -1 : 0));
