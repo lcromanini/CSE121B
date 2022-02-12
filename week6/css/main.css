@@ -68,7 +68,6 @@ nav ul li a:hover {
     color: black;
 }
 
-/* Class Selectors */
 .active {
     background-color: white;
     color: black;
@@ -135,6 +134,11 @@ li {
 	margin-bottom: 0.5rem;
 }
 
+#suggestions{
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
 
 /* Media Queries */
 @media only screen and (min-width: 32.5em) {
@@ -159,6 +163,10 @@ li {
         width: 330px;
     }
 
+    #suggestions{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
     
 }
 
@@ -168,5 +176,10 @@ li {
     }
     input {
         width: 330px;
+    }
+
+    #suggestions{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
     }
 }
